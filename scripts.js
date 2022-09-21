@@ -1,77 +1,35 @@
-body {
-  font-family: "Roboto Mono", monospace;
-  min-height: 600px;
-  background-image: url("https://www.alura.com.br/assets/img/imersoes/dev-2021/dia-03-mentalista.png");
-  background-color: #000000;
-  background-size: cover;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-}
+var numeroSecreto = parseInt(Math.random() * 11);
+var chances = 3;
+function Chutar() {
+  var elementoResultado = document.getElementById("resultado");
+  var resultado = document.getElementById("resultado");
+  var chute = parseInt(document.getElementById("valor").value);
 
-.container {
-  text-align: center;
-  padding: 20px;
-  height: 100vh;
-}
-.valores-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  margin: 50px;
-}
-fieldset {
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-}
-
-.page-title {
-  color: #ffffff;
-  margin: 0 0 5px;
-}
-
-.page-subtitle {
-  color: #ffffff;
-  margin-top: 16px;
-  padding: 40px;
-}
-
-.page-logo {
-  width: 200px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.alura-logo {
-  width: 80px;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
-@media (max-height: 500px) {
-  body {
-    min-height: 800px;
+  if (chute < 0 || chute > 10) {
+    elementoResultado.style.display = "block";
+    resultado.innerHTML = "Você deve digitar um número de 0 a 10";
+    return;
   }
-}
 
-input {
-  margin: 4px;
-  padding: 6px;
-  border-radius: 5px;
-}
+  if (chances == 0) {
+    elementoResultado.style.display = "block";
+    resultado.innerHTML =
+      "Suas chances acabaram atualize a página e tente novamente.";
+    return;
+  }
 
-button {
-  margin-top: 12px;
-  padding: 4px 8px;
-  border-radius: 10px;
-  background: #ffffff;
-}
-
-.resultado {
-  color: #ffffff;
-  text-align: center;
-  margin-top: 16px;
+  if (chute == numeroSecreto) {
+    elementoResultado.style.display = "block";
+    resultado.innerHTML = "Parabéns!Você acertou.";
+  } else if (chute > numeroSecreto) {
+    chances--;
+    elementoResultado.style.display = "block";
+    resultado.innerHTML =
+      "Errou, o número sorteado é menor, você tem mais " + chances + " chances";
+  } else if (chute < numeroSecreto) {
+    chances--;
+    elementoResultado.style.display = "block";
+    resultado.innerHTML =
+      "Errou, o número sorteado é maior, você tem mais " + chances + " chances";
+  }
 }
